@@ -9,6 +9,7 @@
 #include <frc2/command/CommandPtr.h>
 #include <frc2/command/button/CommandXboxController.h>
 #include "subsystems/CommandSwerveDrivetrain.h"
+#include "subsystems/Shooter.h"
 #include "Telemetry.h"
 
 class RobotContainer {
