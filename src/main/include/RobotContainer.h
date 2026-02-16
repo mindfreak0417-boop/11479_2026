@@ -10,6 +10,8 @@
 #include <frc2/command/button/CommandXboxController.h>
 #include "subsystems/CommandSwerveDrivetrain.h"
 #include "Telemetry.h"
+#include "subsystems/SpeedControl.h"
+
 
 class RobotContainer {
 private:
@@ -46,7 +48,7 @@ public:
     frc2::Command *GetAutonomousCommand();
     frc::Field2d m_Field2d;
     frc::Translation2d TargetTranslation{}; 
-
+    SpeedControl m_speedControl;
 private:
     void ConfigureBindings();
 };

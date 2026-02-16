@@ -1,0 +1,41 @@
+{
+  "NetworkTables": {
+    "transitory": {
+      "DriveState": {
+        "open": false
+      },
+      "FMSInfo": {
+        "open": false
+      },
+      "LiveWindow": {
+        "open": false
+      },
+      "PathPlanner": {
+        "open": false
+      },
+      "Shuffleboard": {
+        "open": false
+      },
+      "SmartDashboard": {
+        "Auto Mode": {
+          "open": false
+        },
+        "open": false
+      }
+    }
+  },
+  "NetworkTables Info": {
+    "Clients": {
+      "open": false
+    },
+    "Dashboard@1": {
+      "open": false
+    },
+    "Dashboard@2": {
+      "open": false
+    },
+    "glass@2": {
+      "open": false
+    }
+  }
+}

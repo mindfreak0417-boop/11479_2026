@@ -9,7 +9,6 @@
 #include <frc/smartdashboard/SmartDashboard.h>
 #include <cmath>
 
-
 Robot::Robot() {}
 
 void Robot::RobotPeriodic() {
