@@ -23,6 +23,7 @@ DualMotorModule::DualMotorModule(int motorRightID, int motorLeftID, Config confi
     motorLeftConfigs.MotorOutput.Inverted = config.motorLeftInvert;
     motorLeftConfigs.Slot0.kS = config.kS;
     motorLeftConfigs.Slot0.kV = config.kV;
+    motorLeftConfigs.Slot0.kA = config.kA;
     motorLeftConfigs.Slot0.kP = config.kP;
     motorLeftConfigs.Slot0.kI = config.kI;
     motorLeftConfigs.Slot0.kD = config.kD;

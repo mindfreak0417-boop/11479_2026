@@ -15,9 +15,10 @@ class SingleMotorModule {
   struct Config {
     bool motorInvert = false;
 
-    double kS = 0.1;
-    double kV = 0.12;
-    double kP = 0.11;
+    double kS = 0;
+    double kV = 0;
+    double kA = 0;
+    double kP = 0;
     double kI = 0;
     double kD = 0;
 

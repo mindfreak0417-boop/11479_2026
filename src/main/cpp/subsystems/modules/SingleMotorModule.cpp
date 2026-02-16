@@ -10,6 +10,7 @@ SingleMotorModule::SingleMotorModule(int motorID, Config config)
     motorConfigs.MotorOutput.Inverted = config.motorInvert;
     motorConfigs.Slot0.kS = config.kS;
     motorConfigs.Slot0.kV = config.kV;
+    motorConfigs.Slot0.kA = config.kA;
     motorConfigs.Slot0.kP = config.kP;
     motorConfigs.Slot0.kI = config.kI;
     motorConfigs.Slot0.kD = config.kD;
