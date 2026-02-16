@@ -21,7 +21,10 @@ class ShooterSubsystem : public frc2::SubsystemBase {
     int shootLeftID,
     int suctionRightID,
     int suctionLeftID,
-    int conveyerID 
+    int conveyerID,
+    DualMotorModule::Config shootConfig,
+    DualMotorModule::Config suctionConfig,
+    SingleMotorModule::Config conveyerConfig
   );
 
   frc2::CommandPtr Shooting(turns_per_second_t shootTps, turns_per_second_t suctionTps, turns_per_second_t conveyerTps);

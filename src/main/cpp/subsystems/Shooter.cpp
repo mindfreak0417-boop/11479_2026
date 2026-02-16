@@ -9,8 +9,11 @@ using namespace units::angular_velocity;
 ShooterSubsystem::ShooterSubsystem(
   int shootRightID,   int shootLeftID, 
   int suctionRightID, int suctionLeftID,
-  int conveyerID
-): shootModule{shootRightID, shootLeftID}, suctionModule{suctionRightID, suctionLeftID}, conveyerModule{conveyerID} {}
+  int conveyerID,
+  DualMotorModule::Config shootConfig,
+  DualMotorModule::Config suctionConfig,
+  SingleMotorModule::Config conveyerConfig
+): shootModule{shootRightID, shootLeftID, shootConfig}, suctionModule{suctionRightID, suctionLeftID, suctionConfig}, conveyerModule{conveyerID, conveyerConfig} {}
 
 frc2::CommandPtr ShooterSubsystem::Shooting(turns_per_second_t shootTps, turns_per_second_t suctionTps, turns_per_second_t conveyerTps) {
   return frc2::cmd::Sequence(
@@ -23,10 +26,10 @@ frc2::CommandPtr ShooterSubsystem::Shooting(turns_per_second_t shootTps, turns_p
 
 frc2::CommandPtr ShooterSubsystem::Stop() {
   return frc2::cmd::Sequence(
-      frc2::cmd::RunOnce([this] { DeactivateShooter(); }, {this}),
-      frc2::cmd::Wait(0.5_s),
+      frc2::cmd::RunOnce([this] { DeactivateConveyer(); }, {this}),
       frc2::cmd::RunOnce([this] { DeactivateSuction(); }, {this}),
-      frc2::cmd::RunOnce([this] { DeactivateConveyer(); }, {this})
+      frc2::cmd::Wait(0.5_s),
+      frc2::cmd::RunOnce([this] { DeactivateShooter(); }, {this})
   );
 }
 
