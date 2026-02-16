@@ -10,7 +10,7 @@
 #include <frc2/command/Commands.h>
 #include <frc2/command/button/RobotModeTriggers.h>
 #include <pathplanner/lib/auto/AutoBuilder.h>
-
+#include <iostream>
 
 RobotContainer::RobotContainer()
 {
@@ -18,6 +18,17 @@ RobotContainer::RobotContainer()
     frc::SmartDashboard::PutData("Auto Mode", &autoChooser);
     frc::Shuffleboard::GetTab("Field").Add("Field", m_Field2d).WithSize(6, 4);
     ConfigureBindings();
+
+    /* Retry config apply up to 5 times, report if failure */
+    ctre::phoenix::StatusCode status = ctre::phoenix::StatusCode::StatusCodeNotInitialized;
+    for (int i = 0; i < 5; ++i) {
+        status = m_fx.GetConfigurator().Apply(configs);
+        if (status.IsOK()) break;
+    }
+    if (!status.IsOK()) {
+        std::cout << "Could not apply configs, error code: " << status.GetName() << std::endl;
+    }
+
 }
 
 void RobotContainer::ConfigureBindings()
@@ -54,7 +65,7 @@ void RobotContainer::ConfigureBindings()
                  getAngleFromRobotToTarget(TargetTranslation , drivetrain.GetState().Pose.Translation(),  drivetrain.GetState().Pose.Rotation()));
         })
     );
-    joystick.Y().OnTrue(drivetrain.RunOnce([this] { drivetrain.ResetPose(frc::Pose2d(0_m, 4.033663_m, frc::Rotation2d(0_deg)));}));
+    //joystick.Y().OnTrue(drivetrain.RunOnce([this] { drivetrain.ResetPose(frc::Pose2d(0_m, 4.033663_m, frc::Rotation2d(0_deg)));}));
 
     joystick.POVUp().WhileTrue(
         drivetrain.ApplyRequest([this]() -> auto&& {
@@ -67,10 +78,23 @@ void RobotContainer::ConfigureBindings()
         })
     );
     //RobotSpeedControl 
-    // joystick.POVLeft().WhileTrue(
-    //     frc2::cmd::Run([this] { m_speedControl.SetSpeed(20_tps); },{&m_speedControl}
-    // ));
-                  
+    // joystick.Y().WhileTrue(
+    //     frc2::cmd::Run(
+    //         [this] {
+    //         std::cout << "Y pressed\n";
+    //         test_speedControl1.SetSpeed(20_tps);
+    //         },
+    //         {&test_speedControl1}
+    //     )
+    // );
+    joystick.Y().WhileTrue(
+    frc2::cmd::Run([this] {
+        m_fx.SetControl(m_request.WithVelocity(-45_tps));
+        m_fx1.SetControl(m_request.WithVelocity(45_tps));
+        m_fx2.SetControl(m_request.WithVelocity(5_tps));
+    }, { /* 這裡不要放 drivetrain */ })
+    );
+        
     // Run SysId routines when holding back/start and X/Y.
     // Note that each routine should be run exactly once in a single log.
     // (joystick.Back() && joystick.Y()).WhileTrue(drivetrain.SysIdDynamic(frc2::sysid::Direction::kForward));

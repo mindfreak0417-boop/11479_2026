@@ -11,6 +11,7 @@
 #include "subsystems/CommandSwerveDrivetrain.h"
 #include "Telemetry.h"
 #include "subsystems/SpeedControl.h"
+#include <ctre/phoenix6/controls/MotionMagicDutyCycle.hpp>
 
 
 class RobotContainer {
@@ -30,11 +31,26 @@ private:
         .WithDeadband(MaxSpeed * 0.05).WithRotationalDeadband(MaxAngularRate * 0.05) // Add a 5% deadband
         .WithDriveRequestType(swerve::DriveRequestType::Velocity).WithHeadingPID(8, 0, 0); // Use open-loop control for drive motors
 
-    /* Note: This must be constructed before the drivetrain, otherwise we need to
-     *       define a destructor to un-register the telemetry from the drivetrain */
+
     Telemetry logger{MaxSpeed};
 
     frc2::CommandXboxController joystick{0};
+
+    /////////////////////////////////////
+    // ctre::phoenix6::CANBus kCANBus{"rio"};
+
+    ctre::phoenix6::hardware::TalonFX m_fx{51};
+    ctre::phoenix6::hardware::TalonFX m_fx1{52};
+    ctre::phoenix6::hardware::TalonFX m_fx2{54};
+
+    /* Start at velocity 0, use slot 1 */
+    // ctre::phoenix6::controls::VelocityTorqueCurrentFOC m_velocityTorque =
+    //     ctre::phoenix6::controls::VelocityTorqueCurrentFOC{0_tps}.WithSlot(1);
+    ctre::phoenix6::controls::VelocityDutyCycle m_request =ctre::phoenix6::controls::VelocityDutyCycle{0_tps}.WithSlot(1);
+    /* Keep a neutral out so we can disable the motor */
+    ctre::phoenix6::controls::NeutralOut m_brake{};
+    /////////////////////////////////////
+
 
 public:
     subsystems::CommandSwerveDrivetrain drivetrain{TunerConstants::CreateDrivetrain()};
@@ -46,9 +62,13 @@ private:
 public:
     RobotContainer();
     frc2::Command *GetAutonomousCommand();
-    frc::Field2d m_Field2d;
+    frc::Field2d m_Field2d;  
     frc::Translation2d TargetTranslation{}; 
-    SpeedControl m_speedControl;
+    SpeedControl test_speedControl1{51};
+    SpeedControl test_speedControl2{52};
+
+
+
 private:
     void ConfigureBindings();
 };
