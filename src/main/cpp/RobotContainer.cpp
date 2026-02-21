@@ -67,9 +67,14 @@ void RobotContainer::ConfigureBindings()
         })
     );
 
+    // 利用lamda return 參數 可以讓馬達轉速可以時時被調整而不是當 command 被 schedule 瞬間 讀一次初始值
     // joystick.Y().OnTrue(
-    //     shooter.Shooting(80_tps, 20_tps, 0_tps)
+    //     shooter.Shooting([this] { return 80_tps; }, 
+    //                      [this] { return 20_tps; }, 
+    //                      [this] { return 0_tps;  }
+    //     ) 
     // );
+
     joystick.Y().OnTrue(
         frc2::cmd::RunOnce([this] {
             auto req = m_testModule.velocityControl.WithVelocity(20_tps);

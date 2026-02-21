@@ -4,6 +4,7 @@
 
 #pragma once
 
+#include <frc/Timer.h>
 #include <frc2/command/Commands.h>
 #include <frc2/command/CommandPtr.h>
 #include <frc2/command/SubsystemBase.h>
@@ -12,7 +13,7 @@
 #include "subsystems/modules/SingleMotorModule.h"
 
 using namespace ctre::phoenix6;
-using namespace units::angular_velocity;
+using TPS = units::turns_per_second_t;
 
 class ShooterSubsystem : public frc2::SubsystemBase {
  public:
@@ -26,16 +27,15 @@ class ShooterSubsystem : public frc2::SubsystemBase {
     SingleMotorModule::Config conveyerConfig
   );
 
-  frc2::CommandPtr Shooting(turns_per_second_t shootTps, turns_per_second_t suctionTps, turns_per_second_t conveyerTps);
+  frc2::CommandPtr Shooting(std::function<TPS()> shootTps, std::function<TPS()> suctionTps, std::function<TPS()> conveyerTps);
 
   frc2::CommandPtr Stop();
 
-  void ActivateShooter(turns_per_second_t tps);
+  void ActivateShooter(TPS tps);
 
-  void ActivateSuction(turns_per_second_t tps);
+  void ActivateSuction(TPS tps);
   
-  void ActivateConveyer(turns_per_second_t tps);
-
+  void ActivateConveyer(TPS tps);
   void DeactivateShooter();
   
   void DeactivateSuction();
@@ -48,6 +48,7 @@ class ShooterSubsystem : public frc2::SubsystemBase {
 //   void Periodic() override;
 
  private:
+  frc::Timer m_timer; 
   DualMotorModule shootModule;
   SingleMotorModule suctionModule;
   SingleMotorModule conveyerModule;
