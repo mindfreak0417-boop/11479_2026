@@ -50,4 +50,46 @@ public:
 
 private:
     void ConfigureBindings();
+    ShooterSubsystem shooter{
+        51, 52,
+        54,
+        55,
+        DualMotorModule::Config{
+            .motorRightInvert = true,
+            .motorLeftInvert = false,
+            .kS = 0.19,
+            .kV = 0.111,
+            .kA = 0.0,
+            .kP = 0.0,
+            .kI = 0,
+            .kD = 0,
+            .PeakVoltage = 12_V,
+            .PeakCurrent = 40_A,
+            .RampPeriod = 0.5_s
+        },
+        SingleMotorModule::Config{
+            .motorInvert = false,
+            .kS = 0.197,
+            .kV = 0.11,
+            .kA = 0.0,
+            .kP = 0.0,
+            .kI = 0,
+            .kD = 0,
+            .PeakVoltage = 12_V,
+            .PeakCurrent = 40_A,
+            .RampPeriod = 0.5_s
+        },
+        SingleMotorModule::Config{
+            .motorInvert = false,
+            .kS = 0.2,
+            .kV = 0,
+            .kA = 0.0,
+            .kP = 0.,
+            .kI = 0,
+            .kD = 0,
+            .PeakVoltage = 12_V,
+            .PeakCurrent = 40_A,
+            .RampPeriod = 0.1_s
+        }
+    };
 };
