@@ -29,14 +29,12 @@ void Robot::RobotPeriodic() {
     // Auto Aiming Target Selection
     if (DriverStation::IsDisabled()) {
         auto const allianceColor = DriverStation::GetAlliance();
+        auto isRed = *allianceColor == DriverStation::Alliance::kRed;
         if (allianceColor) {
-                *allianceColor == DriverStation::Alliance::kRed
-                    ? m_container.targetTranslation = Translation2d{11.915394_m, 4.033663_m} // Red alliance target position
-                    : m_container.targetTranslation = Translation2d{4.625594_m, 4.033663_m}; // Blue alliance target position
-                
-                *allianceColor == DriverStation::Alliance::kRed
-                    ? m_container.allianceDirection = Rotation2d{0_deg}     // Red alliance direction
-                    : m_container.allianceDirection = Rotation2d{180_deg};  // Blue alliance direction
+            // Target position and direction based on alliance color
+            m_container.targetTranslation = Translation2d{isRed ? 11.915394_m : 4.625594_m, 4.033663_m};
+            m_container.allianceDirection = isRed ? Rotation2d{0_deg} : Rotation2d{180_deg};
+            m_container.resetPose = Pose2d{isRed ? 3.648_m : 12.892988_m, 4.033663_m, m_container.allianceDirection};
         }
     }
 

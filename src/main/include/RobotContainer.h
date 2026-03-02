@@ -57,6 +57,7 @@ public:
     RobotContainer();
     Command *GetAutonomousCommand();
     Field2d m_Field2d;
+    Pose2d resetPose{};
     Translation2d targetTranslation{}; 
     Rotation2d allianceDirection{}; 
 

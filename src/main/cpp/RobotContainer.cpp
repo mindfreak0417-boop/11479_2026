@@ -108,7 +108,7 @@ void RobotContainer::ConfigureBindings()
 
     joystick.Back().OnTrue(
         drivetrain.RunOnce([this] { 
-            drivetrain.ResetPose(Pose2d(3.648_m, 4.033663_m, Rotation2d(0_deg)));
+            drivetrain.ResetPose(resetPose);
         })
     );
 
