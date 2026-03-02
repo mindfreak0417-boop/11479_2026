@@ -60,8 +60,8 @@ void RobotContainer::ConfigureBindings()
             return FieldCentricFacingAngle_Manualdrive.WithVelocityX(-joystick.GetLeftY() * MaxSpeed * 0.6) 
                 .WithVelocityY(-joystick.GetLeftX() * MaxSpeed) 
                 .WithTargetDirection(drivetrain.GetState().Pose.Rotation() + 
+                mirroredOffset +
                 calcHeadingError(targetTranslation , drivetrain.GetState()) + 
-                targetDirection +
                 calcShootComp(61.32_deg, 1.27935_m, targetTranslation, drivetrain.GetState(), 0.050585_m, 1.0).compAngle);
         })
     );

@@ -50,10 +50,6 @@ ShootCompOutput calcShootComp(degree_t shootDegree,
     double tangentialSpeed = TVcrossRVV / targetDistance.value();
 
     double compAngleRad = atan2(tangentialSpeed, v_comp);
-
-
-    SmartDashboard::PutNumber("Shooter TPS", tps.value());
-
         
     if(tps < 0_tps) {
         SmartDashboard::PutString("Velocity Comp Angle Warning⚠️: ", "TPS < 0");

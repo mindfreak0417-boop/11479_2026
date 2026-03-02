@@ -33,9 +33,8 @@ void Robot::RobotPeriodic() {
         if (allianceColor) {
             // Target position and direction based on alliance color
             m_container.targetTranslation = Translation2d{isRed ? 11.915394_m : 4.625594_m, 4.033663_m};
-            m_container.allianceDirection = isRed ? Rotation2d{0_deg} : Rotation2d{180_deg};
-            m_container.targetDirection = isRed ? Rotation2d{180_deg} : Rotation2d{0_deg};
-            m_container.resetPose = Pose2d{isRed ? 12.892988_m : 3.648_m, 4.033663_m, m_container.allianceDirection};
+            m_container.mirroredOffset = isRed ? Rotation2d{180_deg} : Rotation2d{0_deg};
+            m_container.resetPose = Pose2d{isRed ? 12.892988_m : 3.648_m, 4.033663_m, isRed ? 0_deg : 180_deg};
         }
     }
 
