@@ -15,7 +15,8 @@ CommandPtr ShooterSubsystem::Shooting(function<TPS()> shootTps) {
   return cmd::Run(
       [this, shootTps] {
           TPS currentTps = shootTps();
-
+          SmartDashboard::PutNumber("Raw TPS", currentTps.value());
+          
           if (currentTps < 0_tps || currentTps > 100_tps) {
               systemStatus = false;
               DeactivateShooter();

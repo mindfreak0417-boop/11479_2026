@@ -23,14 +23,12 @@ ShootCompOutput calcShootComp(degree_t shootDegree, meter_t deltaHeight, Transla
     Translation2d targetVector = targetPosition - robotPosition;
     meter_t targetDistance = targetVector.Norm();
 
-    bool shootSafe = false;
     double shootRad = shootDegree.to<double>() * M_PI / 180.0;
     double kWheelCircumferenceMeters  = 2.0 * M_PI * wheelRadius_m.value();
 
     meter_t denom = 2.0 * (targetDistance * tan(shootRad) - deltaHeight);
     
     if (denom <= 0_m) {
-        SmartDashboard::PutBoolean("Shoot Safe", shootSafe);
         return ShootCompOutput{Rotation2d(0_rad), 0_tps};
     }
     else {
@@ -58,10 +56,7 @@ ShootCompOutput calcShootComp(degree_t shootDegree, meter_t deltaHeight, Transla
         // and the absolute value of vSideways and v_comp are used to ensure the angle is calculated correctly regardless of direction. 
         // The kAngleGain is applied to adjust how aggressively the system compensates for sideways motion.
         double compAngleRad = sign * atan2(abs(vSideways), abs(v_comp)) * kAngleGain;
-            
-        shootSafe = (tps >= 0_tps && tps <= 100_tps);
-        SmartDashboard::PutNumber("Raw TPS: ", tps.value());
-        SmartDashboard::PutBoolean("Shoot Safe", shootSafe);
-        return ShootCompOutput{Rotation2d(radian_t(shootSafe ? compAngleRad : 0)), shootSafe ? tps : 0_tps};
+        
+        return ShootCompOutput{Rotation2d(radian_t(compAngleRad)), tps};
     }
 }
