@@ -7,49 +7,31 @@
         {
           "type": "path",
           "data": {
-            "pathName": "BlueMid-ShootMid"
+            "pathName": "Right_Start"
           }
         },
         {
           "type": "wait",
           "data": {
-            "waitTime": 1.5
+            "waitTime": 3.0
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "ShootingTop-NeturalMid"
+            "pathName": "Right_Intake"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "NeutralMid-ShootingTop"
+            "pathName": "Right_Shoot"
           }
         },
         {
           "type": "wait",
           "data": {
-            "waitTime": 1.5
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "ShootingTop-NeturalMid"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "NeutralMid-ShootingTop"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 1.5
+            "waitTime": 3.0
           }
         }
       ]
