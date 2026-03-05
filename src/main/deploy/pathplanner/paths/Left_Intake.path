@@ -20,7 +20,7 @@
         "y": 7.447168874172186
       },
       "prevControl": {
-        "x": 3.1880463576158955,
+        "x": 3.188046357615896,
         "y": 7.468948675496688
       },
       "nextControl": {
@@ -60,7 +60,7 @@
       "minWaypointRelativePos": 1.639575971731478,
       "maxWaypointRelativePos": 2.0,
       "constraints": {
-        "maxVelocity": 1.5,
+        "maxVelocity": 2.0,
         "maxAcceleration": 3.0,
         "maxAngularVelocity": 540.0,
         "maxAngularAcceleration": 720.0,
@@ -70,7 +70,20 @@
     }
   ],
   "pointTowardsZones": [],
-  "eventMarkers": [],
+  "eventMarkers": [
+    {
+      "name": "Arm",
+      "waypointRelativePos": 0.9734219269102994,
+      "endWaypointRelativePos": null,
+      "command": null
+    },
+    {
+      "name": "Intake",
+      "waypointRelativePos": 1.4485049833887018,
+      "endWaypointRelativePos": 2.0,
+      "command": null
+    }
+  ],
   "globalConstraints": {
     "maxVelocity": 3.0,
     "maxAcceleration": 3.0,

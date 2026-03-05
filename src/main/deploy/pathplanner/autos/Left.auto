@@ -13,7 +13,7 @@
         {
           "type": "wait",
           "data": {
-            "waitTime": 3.0
+            "waitTime": 1.5
           }
         },
         {
@@ -31,7 +31,19 @@
         {
           "type": "wait",
           "data": {
-            "waitTime": 3.0
+            "waitTime": 1.5
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Left_Intake"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Left_Shoot"
           }
         }
       ]
