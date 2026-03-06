@@ -66,12 +66,16 @@ void VisionSubsystem::PeriodicUpdate(const Pose2d& robotPose, const meters_per_s
     double xyStdDev;
     double rotStdDev = 999999.0; // Never trust visual rotation; delegate to Pigeon 2
 
-    if (tagCount >= 2) {
-        xyStdDev = 0.12 + (dist * 0.08);
-    } else {
-        xyStdDev = 0.35 + (dist * 0.22);
+    if (tagCount >= 3) {
+        xyStdDev = 0.04 + (dist * 0.03);
+    } 
+    else if (tagCount == 2) {
+        xyStdDev = 0.06 + (dist * 0.04);
     }
-    xyStdDev = clamp(xyStdDev, 0.1, 2.5);
+    else {
+        xyStdDev = 0.30 + (dist * 0.20);
+    }
+    xyStdDev = clamp(xyStdDev, 0.03, 0.9);
     
     // Package data into VisionMeasurement struct
     VisionMeasurement vm;
