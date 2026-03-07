@@ -94,5 +94,4 @@ void VisionSubsystem::PeriodicUpdate(const Pose2d& robotPose, const meters_per_s
     SmartDashboard::PutNumber("Vision/PoseError_m", poseError.value());
     SmartDashboard::PutNumber("Vision/XY_StdDev", xyStdDev);
     SmartDashboard::PutNumber("Vision/TagsSeen", (double)tagCount);
-    SmartDashboard::PutBoolean("Vision/IsReliableForSeed", canForceSeed);
 }

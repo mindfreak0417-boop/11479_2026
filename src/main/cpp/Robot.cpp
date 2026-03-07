@@ -51,11 +51,16 @@ void Robot::RobotPeriodic() {
         vision.PeriodicUpdate(pose, translationSpeed, driveState.Speeds.omega);
         if(auto meas = vision.GetMeasurement()) {
             if (meas->isReliableForSeeding){
+                SmartDashboard::PutString("llmeasurement: ", "VisionSeeding");
                 drivetrain.ResetPose(meas->pose);
             }
             else {
                 drivetrain.AddVisionMeasurement(meas->pose, meas->timestamp, {meas->xyStdDev, meas->xyStdDev, meas->rotStdDev});
+                SmartDashboard::PutString("llmeasurement: ", "AddVisionMeasurement");
             }
+        }
+        else{
+            SmartDashboard::PutString("llmeasurement: ", "No Measurement");
         }
     }
 }
