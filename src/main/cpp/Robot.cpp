@@ -40,7 +40,6 @@ void Robot::RobotPeriodic() {
 
     // Limelight Measurement
     auto& drivetrain = m_container.drivetrain;
-    auto& vision = m_container.m_vision;
     auto& vision2 = m_container.m_vision2;
     auto const driveState = drivetrain.GetState();
     auto const pose = driveState.Pose;
@@ -49,20 +48,20 @@ void Robot::RobotPeriodic() {
     m_container.m_Field2d.SetRobotPose(pose);
 
     if (kUseLimelight) {
-        vision.Update(pose, translationSpeed, driveState.Speeds.omega);
         vision2.Update(pose, translationSpeed, driveState.Speeds.omega);
+
         if(auto meas = vision2.GetLatestUpdate()) {
             if (meas->suggestSeed){
                 drivetrain.ResetPose(meas->pose);
-                SmartDashboard::PutString("llmeasurement: ", "VisionSeeding");
+                SmartDashboard::PutString("Vision/MeasurementAction", "VisionSeeding");
             }
             else {
                 drivetrain.AddVisionMeasurement(meas->pose, meas->timestamp, {meas->xyStdDev, meas->xyStdDev, meas->rotStdDev});
-                SmartDashboard::PutString("llmeasurement: ", "AddVisionMeasurement");
+                SmartDashboard::PutString("Vision/MeasurementAction", "AddVisionMeasurement");
             }
         }
         else{
-            SmartDashboard::PutString("llmeasurement: ", "No Measurement");
+            SmartDashboard::PutString("Vision/MeasurementAction", "NoMeasurement");
         }
     }
 }
