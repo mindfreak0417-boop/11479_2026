@@ -2,7 +2,7 @@
 #include <frc/geometry/Rotation2d.h>
 #include <cmath>
 
-void VisionSubsystem::PeriodicUpdate(const Pose2d& robotPose, const meters_per_second_t translationSpeed, const degrees_per_second_t angularVelocity) {
+void VisionSubsystem::Update(const Pose2d& robotPose, const meters_per_second_t translationSpeed, const degrees_per_second_t angularVelocity) {
     // Provide gyroscope data to Limelight (a core requirement of MegaTag2)
     LimelightHelpers::SetRobotOrientation(
         "limelight",

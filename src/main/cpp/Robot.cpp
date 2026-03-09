@@ -49,7 +49,7 @@ void Robot::RobotPeriodic() {
     m_container.m_Field2d.SetRobotPose(pose);
 
     if (kUseLimelight) {
-        vision.PeriodicUpdate(pose, translationSpeed, driveState.Speeds.omega);
+        vision.Update(pose, translationSpeed, driveState.Speeds.omega);
         vision2.Update(pose, translationSpeed, driveState.Speeds.omega);
         if(auto meas = vision2.GetLatestUpdate()) {
             if (meas->suggestSeed){

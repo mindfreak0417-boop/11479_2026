@@ -30,7 +30,7 @@ class VisionSubsystem : public SubsystemBase {
 public:
     VisionSubsystem() = default;
 
-    void PeriodicUpdate(
+    void Update(
         const Pose2d& robotPose, 
         const meters_per_second_t translationSpeed, 
         const degrees_per_second_t angularVelocity
