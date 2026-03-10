@@ -73,8 +73,8 @@ void IntakeSubsystem::LiftByTurns(Turn turns) {
   auto leftPos  = armModule.motorLeft.GetPosition().GetValue();
   auto rightPos = armModule.motorRight.GetPosition().GetValue();
 
-  Turn leftTarget  = leftPos  - turns;
-  Turn rightTarget = rightPos - turns;
+  leftTarget  = leftPos  - turns;
+  rightTarget = rightPos - turns;
 
   armModule.motorLeft.SetControl(armModule.motionMagicControl.WithPosition(leftTarget));
   armModule.motorRight.SetControl(armModule.motionMagicControl.WithPosition(rightTarget));
@@ -90,7 +90,9 @@ bool IntakeSubsystem::isIntakeActive() const {
 }
 
 bool IntakeSubsystem::isArmActive() {
-  return (armModule.motorLeft.GetMotionMagicAtTarget().GetValue() && armModule.motorRight.GetMotionMagicAtTarget().GetValue());
+  auto errorLeft = armModule.motorLeft.GetPosition().GetValueAsDouble() - leftTarget.value();
+  auto errorRight = armModule.motorRight.GetPosition().GetValueAsDouble() - rightTarget.value();
+  return (abs(errorLeft) < kToleranceRot.value() && abs(errorRight) < kToleranceRot.value());
 }
 
 void IntakeSubsystem::Periodic() {

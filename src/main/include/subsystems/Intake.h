@@ -54,4 +54,7 @@ class IntakeSubsystem : public SubsystemBase {
         
         bool intakeStatus = false;
         bool armStatus = true;
+        Turn leftTarget = 0_tr;
+        Turn rightTarget = 0_tr;
+        Turn kToleranceRot = 0.02_tr;
 };
