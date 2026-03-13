@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 7.827144039732161,
-        "y": 4.5794950331141395
+        "x": 7.827144039735099,
+        "y": 4.543195364238411
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.970471854304635,
-        "y": 7.766605960264901
+        "x": 6.970471854307573,
+        "y": 7.730306291389172
       },
       "isLocked": false,
       "linkedName": "LeftIntakeStopPos"
@@ -41,7 +41,7 @@
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "LeftShootStopPos"
     }
   ],
   "rotationTargets": [
@@ -65,7 +65,7 @@
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 2.5,
+    "maxVelocity": 3.0,
     "maxAcceleration": 3.0,
     "maxAngularVelocity": 360.0,
     "maxAngularAcceleration": 720.0,

@@ -27,6 +27,12 @@
           "data": {
             "name": "StopShooting"
           }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Left_Intake2"
+          }
         }
       ]
     }
